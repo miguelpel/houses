@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import AuthUserContext from './AuthUserContext';
-import SignOutButton from './SignOut';
-import * as routes from '../constants/routes';
+import AuthUserContext from '../../higherorder/AuthUserContext';
+import SignOutButton from '../../sessionmanagment/SignOut';
+import * as routes from '../../../constants/routes';
 
 const Navigation = () =>
   <AuthUserContext.Consumer>

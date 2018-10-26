@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AuthUserContext from './AuthUserContext';
+import AuthUserContext from '../higherorder/AuthUserContext';
 
 const AdminPage = () =>
   <AuthUserContext.Consumer>

@@ -4,16 +4,16 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Navigation from './Navigation';
-import LandingPage from './Landing';
-import SignUpPage from './SignUp';
-import SignInPage from './SignIn';
-import PasswordForgetPage from './PasswordForget';
-import HomePage from './Home';
-import AccountPage from './Account';
+import Navigation from './header/navigation/Navigation';
+import LandingPage from './body/landing/Landing';
+import SignUpPage from './sessionmanagment/SignUp';
+import SignInPage from './sessionmanagment/SignIn';
+import PasswordForgetPage from './sessionmanagment/PasswordForget';
+import HomePage from './body/home/Home';
+import AccountPage from './sessionmanagment/Account';
 
 import * as routes from '../constants/routes';
-import withAuthentication from './withAuthentication';
+import withAuthentication from './higherorder/withAuthentication';
 
 const App = () =>
   <Router>
