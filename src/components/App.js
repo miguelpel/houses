@@ -4,7 +4,6 @@ import {
   Route,
 } from 'react-router-dom';
 
-// import Navigation from './header/navigation/Navigation';
 import Header from './header/Header';
 import LandingPage from './body/landing/Landing';
 import SignUpPage from './sessionmanagment/SignUp';
@@ -12,6 +11,7 @@ import SignInPage from './sessionmanagment/SignIn';
 import PasswordForgetPage from './sessionmanagment/PasswordForget';
 import HomePage from './body/home/Home';
 import AccountPage from './sessionmanagment/Account';
+import HomeFormPage from './body/houseForm/HouseForm';
 
 import * as routes from '../constants/routes';
 import withAuthentication from './higherorder/withAuthentication';
@@ -22,7 +22,6 @@ const App = () =>
   <Router>
     <div className="app">
       <Header />
-      {/* <Navigation /> */}
 
       <Route exact path={routes.LANDING} component={LandingPage} />
       <Route exact path={routes.SIGN_UP} component={SignUpPage} />
@@ -30,6 +29,7 @@ const App = () =>
       <Route exact path={routes.PASSWORD_FORGET} component={PasswordForgetPage} />
       <Route exact path={routes.HOME} component={HomePage} />
       <Route exact path={routes.ACCOUNT} component={AccountPage} />
+      <Route exact path={routes.HOME_FORM} component={HomeFormPage} />
     </div>
   </Router>
 
