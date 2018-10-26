@@ -8,10 +8,10 @@ import * as routes from '../../constants/routes';
 
 const SignInPage = ({ history }) =>
   <div>
-    <h1>SignIn</h1>
+    <h1>Log In</h1>
     <SignInForm history={history} />
     <PasswordForgetLink />
-    <SignUpLink />
+    {/* <SignUpLink /> */}
   </div>
 
 const byPropKey = (propertyName, value) => () => ({
@@ -79,7 +79,7 @@ class SignInForm extends Component {
           placeholder="Password"
         />
         <button disabled={isInvalid} type="submit">
-          Sign In
+          Log In
         </button>
 
         { error && <p>{error.message}</p> }

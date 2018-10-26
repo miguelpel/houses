@@ -1,0 +1,26 @@
+.signUpBtn {
+    padding: 0 3px;
+    background-color: #ebebeb;
+    border: 2px solid black;
+    text-decoration: none;
+    -webkit-box-shadow: 3px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px rgba(0,0,0,0.75);
+}
+
+form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+form input,
+form button {
+    padding:5px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+form p {
+    color: red;
+}

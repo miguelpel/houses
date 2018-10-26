@@ -7,6 +7,8 @@ import {
 import { auth, db } from '../../firebase';
 import * as routes from '../../constants/routes';
 
+import './session.css';
+
 const INITIAL_STATE = {
     username: '',
     email: '',
@@ -117,9 +119,9 @@ class SignUpForm extends Component {
 
 const SignUpLink = () =>
   <p>
-    Don't have an account?
+    or
     {' '}
-    <Link to={routes.SIGN_UP}>Sign Up</Link>
+    <Link className="signUpBtn" to={routes.SIGN_UP}>Sign Up</Link>
   </p>
 
 export default withRouter(SignUpPage);

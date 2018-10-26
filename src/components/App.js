@@ -4,7 +4,8 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Navigation from './header/navigation/Navigation';
+// import Navigation from './header/navigation/Navigation';
+import Header from './header/Header';
 import LandingPage from './body/landing/Landing';
 import SignUpPage from './sessionmanagment/SignUp';
 import SignInPage from './sessionmanagment/SignIn';
@@ -15,12 +16,13 @@ import AccountPage from './sessionmanagment/Account';
 import * as routes from '../constants/routes';
 import withAuthentication from './higherorder/withAuthentication';
 
+import './App.css';
+
 const App = () =>
   <Router>
-    <div>
-      <Navigation />
-
-      <hr/>
+    <div className="app">
+      <Header />
+      {/* <Navigation /> */}
 
       <Route exact path={routes.LANDING} component={LandingPage} />
       <Route exact path={routes.SIGN_UP} component={SignUpPage} />
