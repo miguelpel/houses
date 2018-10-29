@@ -1,0 +1,6 @@
+form textarea {
+    height: 150px;
+    padding:5px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}

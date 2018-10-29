@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage';
 
 const prodConfig = {
     apiKey: "AIzaSyBjdizHEIZ5uUHYuyObxTLijG6P_CZISnU",
@@ -19,7 +20,7 @@ const devConfig = {
     storageBucket: "virtualhouses-dev.appspot.com",
     messagingSenderId: "786326035157"
 };
-  
+
 const config = process.env.NODE_ENV === 'production'
     ? prodConfig
     : devConfig;
@@ -30,8 +31,10 @@ if (!firebase.apps.length) {
 
 const db = firebase.database();
 const auth = firebase.auth();
+const storage = firebase.storage();
 
 export {
     db,
     auth,
+    storage
 };
