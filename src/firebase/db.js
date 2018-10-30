@@ -26,9 +26,9 @@ export const doCreateHouse = (userId, username, address, pocode, description, pi
   const image = storageRef.fullPath
   
   storageRef.put(file)
-  // .then((snapshot) => {
-  // console.log('Uploaded a file');
-  // })
+  .then((snapshot) => {
+  console.log('Uploaded a file');
+  })
   
   return db.ref(`houses`).push().set({
     userId,
@@ -48,46 +48,32 @@ export const doCreateHouse = (userId, username, address, pocode, description, pi
 }
 
 export const addLike = (houseId, userId) => {
-  db.ref(`houses/${houseId}/likes`).push({
-    userId
-  }).then(
-    db.ref(`users/${userId}/opinions/likes`).push({
-      houseId
-    })
-  )
+  let updates = {};
+  updates[`houses/${houseId}/opinions/${userId}`] = "like";
+  updates[`users/${userId}/opinions/${houseId}`] = "like";
+
+  db.ref().update(updates);
 }
 
-export const getLikes = (houseId, callback) => {
-  db.ref(`houses/${houseId}/likes`).on('value', callback);
+export const removeOpinion = (houseId, userId) => {
+  db.ref(`houses/${houseId}/opinions/${userId}`).remove();
+  db.ref(`users/${userId}/opinions/${houseId}`).remove();
 }
 
 export const addHate = (houseId, userId) => {
-  db.ref(`houses/${houseId}/hates`).push({
-    userId
-  })
-}
+  let updates = {};
+  updates[`houses/${houseId}/opinions/${userId}`] = "hate";
+  updates[`users/${userId}/opinions/${houseId}`] = "hate";
 
-export const getOpinion = (houseId, userId, callback) => {
-  // let opinion = null
-  // db.ref(`users/${userId}/opinions/likes`).on('value', snapshot => {
-  //   opinion = snapshot.val()
-  // }).then(() => db.ref(`users/${userId}/opinions/hates`).on('value', snapshot => {
-  //   opinion = [opinion, snapshot.val()]
-  // }))
-  // return callback(opinion)
-  //
-}
-
-export const getHates = (houseId, callback) => {
-  db.ref(`houses/${houseId}/hates`).on('value', callback);
+  db.ref().update(updates);
 }
 
 export const getCards = (callback) => {
   db.ref('houses').on('value', callback);
 }
 
-export const getImgUrl = (image, callback) => {
-  storage.ref(image).getDownloadURL().then(url => callback(url))
+export const getCard = (houseId, callback) => {
+  db.ref(`houses/${houseId}`).on('value', callback);
 }
 
 export const onceGetUserInfos = (user) =>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class Upload extends React.Component {
   constructor(props){
@@ -43,7 +43,7 @@ class Upload extends React.Component {
             accept="image/png, image/jpeg, image/gif"
         />
         <p id="warning" style={{display: 'none', color: 'red'}}>Image Exceeding Max Size (5MB)</p>
-        <img id="reader" src='#' style={{display: 'none'}}/>
+        <img id="reader" alt="preview" src='#' style={{display: 'none'}}/>
       </div>
     );
   }

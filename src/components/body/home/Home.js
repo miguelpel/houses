@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import Card from '../cards/Card';
-import CardList from '../cards/CardList';
+import CardList from '../body/cardcontainer/CardList';
+import { HouseFormLink } from '../houseForm/HouseForm';
+import AuthUserContext from '../../higherorder/AuthUserContext';
 
-import withAuthorization from '../../higherorder/withAuthorization';
+import FiltersBar from '../body/filtersbar/FiltersBar';
 
-import FiltersBar from '../filtersbar/FiltersBar';
+import './Home.css';
 
-class HomePage extends Component {
+const HomePage = () =>
+  <AuthUserContext.Consumer>
+    {authUser => <HomePageAuth user={authUser}/>
+    }
+  </AuthUserContext.Consumer>
+
+class HomePageAuth extends Component {
   constructor(props) {
     super(props);
 
@@ -20,22 +27,19 @@ class HomePage extends Component {
   }
 
   render() {
-    const { cards, filter } = this.state;
-    console.log(cards);
-    console.log(filter)
-    if(filter !== null) console.log(`filter: ${filter.category}`)
+    const { filter } = this.state;
+    // if(filter !== null) console.log(`filter: ${filter.category}`)
     return (
       <div>
         <FiltersBar addFilter={this.addFilter} />
-        <h1>Home</h1>
-        <p>The Home Page is accessible by every user.</p>
+        {/* The Home Page is accessible by every user. */}
+        <div className="newHouseDiv">
+         {this.props.user ? <HouseFormLink /> : ''} 
+        </div>
         <CardList filter={filter} addFilter={this.addFilter} />
       </div>
     );
   }
 }
-// const authCondition = (authUser) => !!authUser;
-
-// export default withAuthorization(authCondition)(HomePage);
 
 export default HomePage;

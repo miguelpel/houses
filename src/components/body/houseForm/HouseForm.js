@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import Uploader from './Uploader';
 import AuthUserContext from '../../higherorder/AuthUserContext';
 import withAuthorization from '../../higherorder/withAuthorization';
-import {
-    Link,
-    withRouter,
-  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
   
-import { auth, db } from '../../../firebase';
+import { db } from '../../../firebase';
 import * as routes from '../../../constants/routes';
   
 import './HouseForm.css';
@@ -44,7 +41,6 @@ import './HouseForm.css';
   class HouseForm extends Component {
     constructor(props) {
       super(props);
-      console.log("constructing house form")
       this.state = { ...INITIAL_STATE };
     }
 
@@ -62,6 +58,12 @@ import './HouseForm.css';
       );
     }
   
+    onCancel = (event) => {
+      this.setState({ ...INITIAL_STATE });
+      this.props.history.push(routes.HOME);
+      event.preventDefault();
+    }
+
     onSubmit = (event) => {
       const {
         userId,
@@ -117,9 +119,6 @@ import './HouseForm.css';
         pocode === '' ||
         description === '' ||
         picture === null;
-  
-        console.log(picture)
-        console.log(isInvalid)
 
       return (
         <AuthUserContext.Consumer>
@@ -153,6 +152,7 @@ import './HouseForm.css';
           </button>
           { error && <p>{error.message}</p> }
         </form>
+          <div><button onClick={e =>{this.onCancel(e)}}>CANCEL</button></div>
             </div>
         }
       </AuthUserContext.Consumer>
@@ -162,7 +162,7 @@ import './HouseForm.css';
   
   const HouseFormLink = () =>
     <p>
-      <Link className="signUpBtn" to={routes.HOME_FORM}>New House</Link>
+      <Link className="houseFormLink" to={routes.HOME_FORM}>New House</Link>
     </p>
   
 const authCondition = (authUser) => !!authUser;

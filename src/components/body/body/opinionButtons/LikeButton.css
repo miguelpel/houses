@@ -1,0 +1,9 @@
+.activelike {
+    color: blue;
+    text-decoration: underline;
+}
+
+.activelike:hover {
+    color: violet;
+    text-decoration: underline;
+}

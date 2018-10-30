@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 
 import Header from './header/Header';
-import LandingPage from './body/landing/Landing';
 import SignUpPage from './sessionmanagment/SignUp';
 import SignInPage from './sessionmanagment/SignIn';
 import PasswordForgetPage from './sessionmanagment/PasswordForget';
