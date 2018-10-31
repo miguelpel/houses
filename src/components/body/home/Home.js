@@ -28,7 +28,6 @@ class HomePageAuth extends Component {
 
   render() {
     const { filter } = this.state;
-    // if(filter !== null) console.log(`filter: ${filter.category}`)
     return (
       <div>
         <FiltersBar addFilter={this.addFilter} />

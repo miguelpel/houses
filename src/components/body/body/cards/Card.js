@@ -3,7 +3,7 @@ import PostedBy from '../postedByDiv/PostedBy';
 import LikeButton from '../opinionButtons/LikeButton';
 import HateButton from '../opinionButtons/HateButton';
 import RemoveOpinion from '../opinionButtons/RemoveOpinion';
-// import Likes from './Likes';
+
 import { db } from '../../../../firebase';
 
 import './Card.css';
@@ -55,7 +55,7 @@ class Card extends Component{
                                 hates={hates}
                                 houseId={this.state.houseId}
                                 userId={this.props.user ? this.props.user.uid : null}
-                            />
+                            /> <span className="ad" id={`ad${this.state.houseId}`}></span>
                     </p>
                     {opinion !== null
                         ? <RemoveOpinion
@@ -76,9 +76,9 @@ class Card extends Component{
                 <div className="card">
                 <p className="address">{data.address}, {data.pocode}</p>
                 <PostedBy username={data.username} addFilter={addFilter} publicationdate={data.publicationdate}/>
-                <div className="description">
-                    <img alt="" src={imgUrl}/>
-                    <p>{data.description}</p>
+                <div className="description_container">
+                        <img alt="" src={imgUrl}/>
+                        <p>{data.description}</p>
                 </div>
                 {this.getLikes()}
                 {/* <Likes
