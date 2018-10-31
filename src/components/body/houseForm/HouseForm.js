@@ -124,8 +124,7 @@ import './HouseForm.css';
         <AuthUserContext.Consumer>
         {authUser =>
             <div>
-            <h1>User name: {username}</h1>
-            <h2>User id: {userId}</h2>
+            <h2>User: {username}</h2>
             <form onSubmit={this.onSubmit}>
           <Uploader onChange={this.onDrop}/>
           <input

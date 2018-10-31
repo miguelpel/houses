@@ -21,8 +21,13 @@ class Card extends Component{
 
     componentDidMount = () => {
         db.getCard(this.state.houseId, (data) => this.setState({
-            data: data.val(),
-            imgUrl: `https://firebasestorage.googleapis.com/v0/b/virtualhouses-dev.appspot.com/o/${data.val().image}?alt=media`
+            data: data.val()
+        }, this.getPicture))
+    }
+
+    getPicture = () => {
+        db.getImgUrl(this.state.data.image, (url) => this.setState({
+            imgUrl: url
         }))
     }
 

@@ -72,6 +72,11 @@ export const getCards = (callback) => {
   db.ref('houses').on('value', callback);
 }
 
+export const getImgUrl = (imgName, callback) => {
+  const storageRef = storage.ref(imgName);
+  storageRef.getDownloadURL().then(url => callback(url))
+}
+
 export const getCard = (houseId, callback) => {
   db.ref(`houses/${houseId}`).on('value', callback);
 }
