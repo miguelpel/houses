@@ -25,11 +25,11 @@ class Card extends Component{
         }, this.getPicture))
     }
 
-    getPicture = () => {
-        db.getImgUrl(this.state.data.image, (url) => this.setState({
-            imgUrl: url
-        }))
-    }
+    // getPicture = () => {
+    //     db.getImgUrl(this.state.data.image, (url) => this.setState({
+    //         imgUrl: url
+    //     }))
+    // }
 
     getLikes = () => {
             let likes = 0;
@@ -76,13 +76,13 @@ class Card extends Component{
     
     render() {
         if(this.state.data) {
-            const { data, imgUrl, addFilter } = this.state;
+            const { data, addFilter } = this.state;
             return(
                 <div className="card">
                 <p className="address">{data.address}, {data.pocode}</p>
                 <PostedBy username={data.username} addFilter={addFilter} publicationdate={data.publicationdate}/>
                 <div className="description_container">
-                        <img alt="" src={imgUrl}/>
+                        <img alt="" src={data.image ? data.image : "#"}/>
                         <p>{data.description}</p>
                 </div>
                 {this.getLikes()}

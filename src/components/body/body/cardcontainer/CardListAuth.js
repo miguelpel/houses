@@ -10,11 +10,16 @@ class CardListAuth extends Component {
         user: this.props.user,
         cards: []
       };
+      this.isCancelled = false;
     }
 
-    componentWillUnmount() {
+    componentWillUnmount = () => {
         this.isCancelled = true;
     }
+
+    // componentWillMount = () => {
+    //     this.isCancelled = false;
+    // }
 
     componentDidMount = () => {
         db.getCards(cards => {
@@ -27,7 +32,7 @@ class CardListAuth extends Component {
                           houseId={key}
                           addFilter={this.props.addFilter}
                       />
-            })
+            });
             !this.isCancelled && this.setState({
                 cards : returnCards,
             });

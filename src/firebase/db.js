@@ -14,7 +14,31 @@ export const doCreateUser = (id, username, email) =>
   .catch((e) => {
     console.log(e)
   });
+
+// to work on a 'load picture' event listener
+export const doCreateHouseImage = (picture) => {
+  const file = picture
+  const fileName = file.name;
+  const timestamp = Number(new Date());
+  const storageRef = storage.ref(timestamp.toString() + fileName);
   
+  return storageRef.put(file);
+}
+
+export const doStoreHouse = (userId, username, address, pocode, description, image, publicationdate, likes, hates) => {
+  console.log('do store house');
+  return db.ref(`houses`).push().set({
+    userId,
+    username,
+    address,
+    pocode,
+    description,
+    image,
+    publicationdate,
+    likes,
+    hates
+  })
+}
 
 export const doCreateHouse = (userId, username, address, pocode, description, picture, publicationdate, likes, hates) => {
 

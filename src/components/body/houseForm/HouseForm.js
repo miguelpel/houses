@@ -4,7 +4,7 @@ import AuthUserContext from '../../higherorder/AuthUserContext';
 import withAuthorization from '../../higherorder/withAuthorization';
 import { Link } from 'react-router-dom';
   
-import { db } from '../../../firebase';
+import { db, firebase } from '../../../firebase';
 import * as routes from '../../../constants/routes';
   
 import './HouseForm.css';
@@ -66,33 +66,77 @@ import './HouseForm.css';
 
     onSubmit = (event) => {
       const {
-        userId,
-        username,
-        address,
-        pocode,
-        description,
-        picture,
-        likes,
-        hates
+          userId,
+          username,
+          address,
+          pocode,
+          description,
+          picture,
+          likes,
+          hates
       } = this.state;
-  
+
       const currentdate = Date()
 
-      const {
-          history,
-        } = this.props;
-      
-        db.doCreateHouse(userId, username, address, pocode, description, picture, currentdate, likes, hates)
+      const uploadTask = db.doCreateHouseImage(picture)
+
+      uploadTask.on('state_changed', (snapshot) => {
+        let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const loading = document.getElementById('loading');
+        loading.innerHTML = `Uploading image: ${progress} % done. ${progress < 100 ? "Please Wait" : ""}`;
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+          loading.innerHTML = 'Upload is paused';
+            break;
+        }
+      }, (error) => {
+        this.setState(byPropKey('Uploading image failed:', error));
+      }, () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log('File available at', downloadURL);
+
+          db.doStoreHouse(userId, username, address, pocode, description, downloadURL, currentdate, likes, hates)
             .then(() => {
               this.setState({ ...INITIAL_STATE });
-              history.push(routes.HOME);
+              this.props.history.push(routes.HOME);
             })
             .catch(error => {
               this.setState(byPropKey('error', error));
             });
-  
+        });
+      });
       event.preventDefault();
     }
+
+    // onSubmit = (event) => {
+    //   const {
+    //     userId,
+    //     username,
+    //     address,
+    //     pocode,
+    //     description,
+    //     picture,
+    //     likes,
+    //     hates
+    //   } = this.state;
+  
+    //   const currentdate = Date()
+
+    //   const {
+    //       history,
+    //     } = this.props;
+      
+    //     db.doCreateHouse(userId, username, address, pocode, description, picture, currentdate, likes, hates)
+    //         .then(() => {
+    //           this.setState({ ...INITIAL_STATE });
+    //           history.push(routes.HOME);
+    //         })
+    //         .catch(error => {
+    //           this.setState(byPropKey('error', error));
+    //         });
+  
+    //   event.preventDefault();
+    // }
 
     onDrop = (picture) => {
       this.setState({
@@ -125,6 +169,7 @@ import './HouseForm.css';
         {authUser =>
             <div>
             <h2>User: {username}</h2>
+            <h3 style={{color:'red'}} id='loading'></h3>
             <form onSubmit={this.onSubmit}>
           <Uploader onChange={this.onDrop}/>
           <input
